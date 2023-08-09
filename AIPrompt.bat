@@ -27,8 +27,10 @@ if "%command%" == "exit" (
     call :show_version
 ) else if "%command%" == "os" (
     call :show_os
+) else if "%command%" == "Run" (
+    start Erunner.bat
 ) else (
-    echo Command not found. %command%
+    echo Command not found: %command%
 )
 
 goto :mainloop
