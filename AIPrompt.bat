@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-title Elinux - Programmer's Dream OS
+title Elinux - open source os
 
 set "repo_path=C:\Path\To\Your\Repository"
 set "current_directory=%repo_path%"
@@ -67,9 +67,9 @@ echo.>"%file_name%" || (
 exit /b
 
 :show_version
-echo Elinux v1.0
+echo Elinux v1.0 Birth
 exit /b
 
 :show_os
-echo Elinux - Programmer's Dream OS
+echo Elinux - Open source os. Visit the source code: https://github.com/Elisworlddeve/ProjectElinux
 exit /b
