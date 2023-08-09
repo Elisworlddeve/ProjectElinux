@@ -99,3 +99,4 @@ goto :gameLoop
 :gameOver
 echo Game Over!
 pause
+: "Ok this is broken :skull:"
