@@ -3,7 +3,7 @@ setlocal
 
 title Elinux - open source os
 
-set "repo_path=C:\Path\To\Your\Repository"
+set "repo_path=C:\"
 set "current_directory=%repo_path%"
 
 :mainloop
@@ -28,7 +28,7 @@ if "%command%" == "exit" (
 ) else if "%command%" == "os" (
     call :show_os
 ) else (
-    echo Command not found.
+    echo Command not found. %command%
 )
 
 goto :mainloop
