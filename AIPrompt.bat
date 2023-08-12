@@ -27,8 +27,25 @@ if "%command%" == "exit" (
     call :show_version
 ) else if "%command%" == "os" (
     call :show_os
-) else if "%command%" == "Run" (
-    start Erunner.bat
+) else if "%command%" == "run" (
+    set /p "file_to_run=Enter the name of the .bat file to run: "
+    start "%file_to_run%"
+) else if "%command%" == "drinfo" (
+    call :drive_info
+) else if "%command%" == "format" (
+    call :format_drive
+) else if "%command:~0,5%" == "read " (
+    call :read_file "%command:~5%"
+) else if "%command:~0,7%" == "delete " (
+    call :delete_file "%command:~7%"
+) else if "%command:~0,7%" == "deldir " (
+    call :delete_directory "%command:~7%"
+) else if "%command%" == "root" (
+    set "current_directory=%repo_path%"
+) else if "%command%" == "etree" (
+    call :tree "%current_directory%"
+) else if "%command%" == "back" (
+    call :go_back
 ) else (
     echo Command not found: %command%
 )
@@ -74,4 +91,61 @@ exit /b
 
 :show_os
 echo Elinux - Open source os. Visit the source code: https://github.com/Elisworlddeve/ProjectElinux
+exit /b
+
+:drive_info
+echo Drive information for %current_directory%
+vol %current_directory:~0,2%
+fsutil volume diskfree %current_directory:~0,2%
+exit /b
+
+:format_drive
+set /p "confirm=Formatting a drive will delete all data. Are you sure you want to continue? (yes/no): "
+if /i "%confirm%" == "yes" (
+    echo Formatting drive %current_directory:~0,2%...
+    format %current_directory:~0,2% /q /y
+) else (
+    echo Format cancelled.
+)
+:read_file
+set "file_to_read=%~1"
+if exist "%file_to_read%" (
+    type "%file_to_read%"
+) else (
+    echo File not found.
+)
+exit /b
+
+:delete_file
+set "file_to_delete=%~1"
+if exist "%file_to_delete%" (
+    del "%file_to_delete%"
+) else (
+    echo File not found.
+)
+exit /b
+
+:delete_directory
+set "dir_to_delete=%~1"
+if exist "%dir_to_delete%" (
+    rmdir /s /q "%dir_to_delete%"
+) else (
+    echo Directory not found.
+)
+exit /b
+
+:tree
+setlocal
+set "root_dir=%~1"
+dir /s /b /o:gn "%root_dir%"
+endlocal
+exit /b
+
+:go_back
+for %%I in ("%current_directory%") do set "parent_dir=%%~dpI"
+if not "%parent_dir%" == "%current_directory%" (
+    set "current_directory=%parent_dir%"
+) else (
+    echo Already at the root directory.
+)
 exit /b
