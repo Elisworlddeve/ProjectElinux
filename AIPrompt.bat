@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-title Elinux - open source os
+title Elinux - a mix 
 
 set "repo_path=C:\"
 set "current_directory=%repo_path%"
@@ -25,14 +25,14 @@ if "%command%" == "exit" (
     call :create_file "%command:~6%"
 ) else if "%command%" == "ver" (
     call :show_version
-) else if "%command%" == "os" (
+) else if "%command%" == "opinfo" (
     call :show_os
-) else if "%command%" == "run" (
+) else if "%command%" == "erunner" (
     set /p "file_to_run=Enter the name of the .bat file to run: "
     start "%file_to_run%"
 ) else if "%command%" == "drinfo" (
     call :drive_info
-) else if "%command%" == "format" (
+) else if "%command%" == "drerase" (
     call :format_drive
 ) else if "%command:~0,5%" == "read " (
     call :read_file "%command:~5%"
@@ -46,6 +46,8 @@ if "%command%" == "exit" (
     call :tree "%current_directory%"
 ) else if "%command%" == "back" (
     call :go_back
+) else if "%command%" == "ipinfo" (
+    ipconfig
 ) else (
     echo Command not found: %command%
 )
@@ -146,6 +148,8 @@ for %%I in ("%current_directory%") do set "parent_dir=%%~dpI"
 if not "%parent_dir%" == "%current_directory%" (
     set "current_directory=%parent_dir%"
 ) else (
-    echo Already at the root directory.
+    echo Already at the root directory...
 )
 exit /b
+
+
