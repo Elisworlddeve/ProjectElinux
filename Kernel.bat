@@ -31,8 +31,8 @@ if "%command%" == "exit" (
 ) else if "%command%" == "osinfo" (
     call :show_os
 ) else if "%command%" == "erunner" (
-    set /p "file_to_run=Enter the name of the .bat file to run: "
-    start "%file_to_run%"
+    
+    start erunner.bat
 ) else if "%command%" == "drinfo" (
     call :drive_info
 ) else if "%command%" == "drerase" (
