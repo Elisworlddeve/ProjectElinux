@@ -1,31 +1,34 @@
 @echo off
 setlocal
 
-title Elinux - a mix 
+title Elinux - a command line made for sofware
 
 set "repo_path=C:\"
 set "current_directory=%repo_path%"
 
+
+
+
 :mainloop
 set "prompt=%current_directory%$ "
-set /p  "command=Elinux$ "
+set /p  "command=Elinux$$ "
 
-if "%command%" == "exit" (
+if "%command%" == "eXleave" (
     echo Exiting Elinux...
     exit /b
-) else if "%command:~0,2%" == "cd" (
+) else if "%command:~0,2%" == "changedir" (
     call :change_directory "%command:~3%"
-) else if "%command%" == "pwd" (
+) else if "%command%" == "whatdir" (
     call :print_current_directory
-) else if "%command%" == "ls" (
+) else if "%command%" == "check" (
     call :list_directory
-) else if "%command:~0,6%" == "mkdir " (
+) else if "%command:~0,6%" == "folder " (
     call :create_directory "%command:~6%"
-) else if "%command:~0,6%" == "touch " (
+) else if "%command:~0,6%" == "printin " (
     call :create_file "%command:~6%"
 ) else if "%command%" == "ver" (
     call :show_version
-) else if "%command%" == "opinfo" (
+) else if "%command%" == "osinfo" (
     call :show_os
 ) else if "%command%" == "erunner" (
     set /p "file_to_run=Enter the name of the .bat file to run: "
@@ -34,19 +37,20 @@ if "%command%" == "exit" (
     call :drive_info
 ) else if "%command%" == "drerase" (
     call :format_drive
-) else if "%command:~0,5%" == "read " (
+) else if "%command:~0,5%" == "printout " (
     call :read_file "%command:~5%"
-) else if "%command:~0,7%" == "delete " (
+) else if "%command:~0,7%" == "erase " (
     call :delete_file "%command:~7%"
-) else if "%command:~0,7%" == "deldir " (
+) else if "%command:~0,7%" == "drdir " (
     call :delete_directory "%command:~7%"
-) else if "%command%" == "root" (
+) else if "%command%" == "break" (
     set "current_directory=%repo_path%"
 ) else if "%command%" == "etree" (
     call :tree "%current_directory%"
-) else if "%command%" == "back" (
+) else if "%command%" == "rewind" (
     call :go_back
-) else if "%command%" == "ipinfo" (
+) else if "%command%" == "fakedoxx" (
+    echo "Doxxing you now..."
     ipconfig
 ) else (
     echo Command not found: %command%
@@ -88,7 +92,7 @@ echo.>"%file_name%" || (
 exit /b
 
 :show_version
-echo Elinux v1.0 Birth
+echo 1.00.00
 exit /b
 
 :show_os
