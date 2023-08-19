@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-title Elinux - a command line made for sofware
+title Elinux - Linux in windows command line 
 
 set "repo_path=C:\"
 set "current_directory=%repo_path%"
@@ -13,18 +13,18 @@ set "current_directory=%repo_path%"
 set "prompt=%current_directory%$ "
 set /p  "command=Elinux$$ "
 
-if "%command%" == "eXleave" (
+if "%command%" == "exit" (
     echo Exiting Elinux...
     exit /b
-) else if "%command:~0,2%" == "changedir" (
+) else if "%command:~0,2%" == "cd" (
     call :change_directory "%command:~3%"
-) else if "%command%" == "whatdir" (
+) else if "%command%" == "pwd" (
     call :print_current_directory
-) else if "%command%" == "check" (
+) else if "%command%" == "ls" (
     call :list_directory
-) else if "%command:~0,6%" == "folder " (
+) else if "%command:~0,6%" == "mkdir " (
     call :create_directory "%command:~6%"
-) else if "%command:~0,6%" == "printin " (
+) else if "%command:~0,6%" == "touch " (
     call :create_file "%command:~6%"
 ) else if "%command%" == "ver" (
     call :show_version
@@ -37,20 +37,19 @@ if "%command%" == "eXleave" (
     call :drive_info
 ) else if "%command%" == "drerase" (
     call :format_drive
-) else if "%command:~0,5%" == "printout " (
+) else if "%command:~0,5%" == "read " (
     call :read_file "%command:~5%"
-) else if "%command:~0,7%" == "erase " (
+) else if "%command:~0,7%" == "delete " (
     call :delete_file "%command:~7%"
-) else if "%command:~0,7%" == "drdir " (
+) else if "%command:~0,7%" == "deldir " (
     call :delete_directory "%command:~7%"
-) else if "%command%" == "break" (
+) else if "%command%" == "root" (
     set "current_directory=%repo_path%"
 ) else if "%command%" == "etree" (
     call :tree "%current_directory%"
-) else if "%command%" == "rewind" (
+) else if "%command%" == "back" (
     call :go_back
-) else if "%command%" == "fakedoxx" (
-    echo "Doxxing you now..."
+) else if "%command%" == "ipinfo" (
     ipconfig
 ) else (
     echo Command not found: %command%
